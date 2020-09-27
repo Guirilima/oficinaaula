@@ -20,6 +20,14 @@
 	</properties>
 
 	<dependencies>
+<!--		LOMBOK-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.8</version>
+			<scope>provided</scope>
+		</dependency>
+<!--		LOMBOK-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
