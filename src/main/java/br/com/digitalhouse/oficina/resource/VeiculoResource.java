@@ -1,5 +1,6 @@
 package br.com.digitalhouse.oficina.resource;
 
+import java.math.BigInteger;
 import java.net.URI;
 import java.util.List;
 
@@ -15,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.digitalhouse.oficina.model.Veiculo;
+import br.com.digitalhouse.oficina.model.VeiculoEntity;
 import br.com.digitalhouse.oficina.service.VeiculoService;
 
 @RestController
-@RequestMapping("/veiculos")
+@RequestMapping("/veiculos") //localhost:8080/veiculos
 public class VeiculoResource {
 	
 	private final VeiculoService veiculoService;
@@ -31,14 +32,14 @@ public class VeiculoResource {
 	
 	
 	@PostMapping
-	public ResponseEntity<Void> create( @RequestBody Veiculo veiculo){
+	public ResponseEntity<Void> create( @RequestBody VeiculoEntity veiculoEntity){
 		
-		veiculo = this.veiculoService.create(veiculo);
+		veiculoEntity = this.veiculoService.create(veiculoEntity);
 		
 		URI uri = ServletUriComponentsBuilder
 				 .fromCurrentRequest()
 				 .path("/{id}")
-				 .buildAndExpand(veiculo.getId())
+				 .buildAndExpand(veiculoEntity.getIdVeiculo())
 				 .toUri();
 		
 		
@@ -47,10 +48,10 @@ public class VeiculoResource {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Veiculo veiculo){
-		veiculo.setId(id);
+	public ResponseEntity<Void> update(@PathVariable BigInteger id, @RequestBody VeiculoEntity veiculoEntity){
+		veiculoEntity.setIdVeiculo(id);
 		
-		this.veiculoService.update(veiculo);
+		this.veiculoService.update(veiculoEntity);
 		
 		return ResponseEntity.noContent().build();
 		
@@ -58,53 +59,26 @@ public class VeiculoResource {
 	
 	
 	@GetMapping("/{id}")  // /veiculos/3
-	public ResponseEntity<Veiculo> findById(@PathVariable Long id){
+	public ResponseEntity<VeiculoEntity> findById(@PathVariable BigInteger id){
 		
-		Veiculo veiculo = this.veiculoService.findById(id);
+		VeiculoEntity veiculoEntity = this.veiculoService.findById(id);
 		
-		return ResponseEntity.ok(veiculo);
+		return ResponseEntity.ok(veiculoEntity);
 	}
 	
 	@GetMapping // /veiculos
-	public ResponseEntity<List<Veiculo>> findAll(){
+	public ResponseEntity<List<VeiculoEntity>> findAll(){
 		
-		List<Veiculo> veiculos = this.veiculoService.findAll();
+		List<VeiculoEntity> veiculoEntities = this.veiculoService.findAll();
 		
-		return ResponseEntity.ok(veiculos);
+		return ResponseEntity.ok(veiculoEntities);
 		
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable BigInteger id){
 		this.veiculoService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
