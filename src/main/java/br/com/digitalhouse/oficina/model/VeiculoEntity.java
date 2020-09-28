@@ -13,15 +13,15 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @Table(name = "VEICULOS")
 public class VeiculoEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "ID_VEICULO_VEI")
 	private BigInteger idVeiculo;
-	
+
 	@Column(name = "VEI_PLACA_VEI",length = 7, nullable = false)
 	private String placaVeiculo;
-	
+
 	@Column(name = "VEI_COR_VEI",length = 30, nullable = false)
 	private String corVeiculo;
 

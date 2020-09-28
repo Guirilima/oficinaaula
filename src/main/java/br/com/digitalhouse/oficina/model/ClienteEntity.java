@@ -19,18 +19,18 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "CLIENTES")
 public class ClienteEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "ID_CLIENTE_CL")
 	private BigInteger idCliente;
-	
+
 	@Column(name = "NM_NOME_CL",length = 60, nullable = false)
 	private String nomeCliente;
 
 	@OneToMany(mappedBy = "cliente")
 	private Set<VeiculoEntity> veiculos = new HashSet<VeiculoEntity>();
-	
+
 }
 
 //	@OneToMany(mappedBy = "cliente")
